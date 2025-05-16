@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 15px;
+            color: #222;
+            background: #fff;
+            margin: 0;
+        }
+        .container {
+            width: 800px;
+            margin: 40px auto;
+            padding: 0;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 12px #f2f2f2;
+            background: #fff;
+        }
+        .header {
+            padding: 30px 40px 20px 40px;
+            border-bottom: 1px solid #eee;
+        }
+        .client {
+            font-size: 28px;
+            font-weight: 600;
+        }
+        .client-details {
+            font-size: 16px;
+            margin: 8px 0 0 0;
+        }
+        .contact-details {
+            font-size: 15px;
+            margin-top: 4px;
+        }
+        .invoice-title-row {
+            padding: 18px 40px 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #eee;
+            align-items: center;
+        }
+        .invoice-title {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        .invoice-num {
+            font-size: 20px;
+        }
+        .invoice-phone {
+            font-size: 16px;
+        }
+        .bill-location-section {
+            display: flex;
+            justify-content: space-between;
+            padding: 28px 40px 0 40px;
+            margin-bottom: 8px;
+        }
+        .bill-to, .location {
+            width: 48%;
+            font-size: 15px;
+        }
+        .bill-label, .location-label {
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .bill-to, .date {
+            width: 48%;
+            font-size: 15px;
+        }
+        .date {
+            min-width: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            margin-left: 24px;
+        }
+        .date-row {
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+        .items-table {
+            width: 90%;
+            margin: 30px auto 0 auto;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+        .items-table th, .items-table td {
+            border-bottom: 1px solid #eee;
+            padding: 12px 8px;
+            text-align: left;
+        }
+        .items-table th {
+            font-weight: 700;
+            background: #f8f8f8;
+        }
+        .items-table td:last-child, .items-table th:last-child {
+            text-align: right;
+        }
+        .summary-section {
+            width: 90%;
+            margin: 25px auto 0 auto;
+        }
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+        .summary-table td {
+            padding: 10px 4px;
+            text-align: left;
+        }
+        .summary-table .label {
+            font-weight: 500;
+        }
+        .summary-table .value {
+            text-align: right;
+            width: 130px;
+        }
+        .summary-table .bold {
+            font-weight: 700;
+        }
+        .footer {
+            text-align: left;
+            padding: 25px 40px 10px 40px;
+            border-top: 1px solid #eee;
+            font-size: 15px;
+            color: #444;
+        }
+        .thanks {
+            font-size: 17px;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+        .terms {
+            font-size: 15px;
+            color: #333;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <div class="client">$!client.name</div>
+        <div class="client-details">$!client.address</div>
+        <div class="client-details">$!client.website, $!client.email</div>
+    </div>
+    <!-- Invoice Title/Number/Phone -->
+    <div class="invoice-title-row">
+        <div>
+            <div class="invoice-title">INVOICE #$!invoice.invoiceNumber</div> <br>
+            <div class="invoice-phone">$!client.phone</div>
+        </div>
+    </div>
+    <!-- Bill To and Location -->
+    <div class="bill-location-section">
+        <div class="bill-to">
+            <div class="bill-label">BILL TO</div>
+            $!invoice.customerName <br>
+            $!client.name <br>
+            $!client.address <br>
+            $!client.phone, $!invoice.customerEmail
+        </div>
+        <div class="location">
+            <div class="location-label">LOCATION</div>
+            $!address.street <br>
+            $!address.city, $!address.state $!address.zip
+            <div class="date-row">Phone: $!client.phone</div>
+        </div>
+        <div class="date">
+            <div class="location-label">Date</div>
+            <div class="date-row">Invoice Date: $!invoice.invoiceDate</div>
+            <div class="date-row">Due Date: $!invoice.dueDate</div>
+        </div>
+    </div>
+    <!-- Items Table -->
+    <table class="items-table">
+        <tr>
+            <th>DESCRIPTION</th>
+            <th>QTY</th>
+            <th>UNIT PRICE</th>
+            <th>TOTAL</th>
+        </tr>
+        #foreach($item in $items)
+            <tr>
+                <td>$!item.name</td>
+                <td>$!item.quantity</td>
+                <td>$!item.price</td>
+                <td>#set($lineTotal = $item.quantity * $item.price)$lineTotal</td>
+            </tr>
+        #end
+    </table>
+    <!-- Summary Table -->
+    <div class="summary-section">
+        <table class="summary-table">
+            <tr>
+                <td class="label">SUBTOTAL</td>
+                <td class="value">$!invoice.subtotal</td>
+            </tr>
+            <tr>
+                <td class="label">DISCOUNT</td>
+                <td class="value">0.00</td>
+            </tr>
+            <tr>
+                <td class="label">SUBTOTAL LESS DISCOUNT</td>
+                <td class="value">$!invoice.subtotal</td>
+            </tr>
+            <tr>
+                <td class="label">TAX RATE</td>
+                <td class="value">$!invoice.tax%</td>
+            </tr>
+            <tr>
+                <td class="label">TOTAL TAX</td>
+                <td class="value">$!invoice.tax</td>
+            </tr>
+            <tr>
+                <td class="label bold">BALANCE DUE</td>
+                <td class="value bold">$!invoice.total</td>
+            </tr>
+        </table>
+    </div>
+    <!-- Footer / Thank You and Terms -->
+    <div class="footer">
+        <div class="thanks">Thank you for your business!</div>
+        <div class="terms">
+            <strong>Terms & Instructions:</strong><br>
+            #if($invoice.paymentInstructions && $invoice.paymentInstructions.trim() != "")
+                $invoice.paymentInstructions
+            #else
+                Please make the payment via bank transfer within 30 days.
+            #end
+            <br>
+            #if($invoice.termsAndConditions && $invoice.termsAndConditions.trim() != "")
+                $invoice.termsAndConditions
+            #else
+                All sales are final. Goods sold are not returnable or exchangeable.
+            #end
+        </div>
+    </div>
+</div>
+</body>
+</html>
