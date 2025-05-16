@@ -1,6 +1,7 @@
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.Client;
+import model.Company;
 import model.Invoice;
 import service.VelocityRenderer;
 
@@ -22,10 +23,17 @@ public class Main {
                     new URL("http://localhost:3000/clients"),
                     new TypeReference<List<Client>>() {}
             );
+
+            List<Company> companies = mapper.readValue(
+                    new URL("http://localhost:3000/companies"),
+                    new TypeReference<List<Company>>() {}
+            );
+
             Invoice invoice = invoices.get(0); // Take the first invoice
             Client client = clients.get(0); // Take the first client
+            Company company = companies.get(0); // Take the first company
 
-            String html = VelocityRenderer.renderInvoice(invoice, client);
+            String html = VelocityRenderer.renderInvoice(invoice, client, company);
 
             // Save HTML to file
             Path outputPath = Path.of("outputs", "invoice.html");

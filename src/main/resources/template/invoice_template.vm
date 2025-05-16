@@ -148,15 +148,15 @@
 <div class="container">
     <!-- Header -->
     <div class="header">
-        <div class="client">$!client.name</div>
-        <div class="client-details">$!client.address</div>
-        <div class="client-details">$!client.website, $!client.email</div>
+        <div class="client">$!company.name</div>
+        <div class="client-details">$!company.address</div>
+        <div class="client-details">$!company.website, $!company.email</div>
     </div>
     <!-- Invoice Title/Number/Phone -->
     <div class="invoice-title-row">
         <div>
             <div class="invoice-title">INVOICE #$!invoice.invoiceNumber</div> <br>
-            <div class="invoice-phone">$!client.phone</div>
+            <div class="invoice-phone">$!company.phone</div>
         </div>
     </div>
     <!-- Bill To and Location -->
@@ -171,8 +171,8 @@
         <div class="location">
             <div class="location-label">LOCATION</div>
             $!address.street <br>
-            $!address.city, $!address.state $!address.zip
-            <div class="date-row">Phone: $!client.phone</div>
+            $!address.city, $!address.state $!address.zip <br>
+            $!client.phone
         </div>
         <div class="date">
             <div class="location-label">Date</div>

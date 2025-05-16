@@ -9,6 +9,7 @@ public class Company {
     private String phone;
     private String email;
     private String website;
+    private String logoUrl;
 
     public String getName() {
         return name;
@@ -48,5 +49,13 @@ public class Company {
 
     public void setWebsite(String website) {
         this.website = website;
+    }
+
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
     }
 }

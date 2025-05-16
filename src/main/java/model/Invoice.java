@@ -24,7 +24,7 @@ public class Invoice {
 
     public Invoice() {
         LocalDate now = LocalDate.now();
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd-MM-yy");
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yy");
         this.invoiceDate = now.format(fmt);
         this.dueDate = now.plusDays(30).format(fmt);
     }

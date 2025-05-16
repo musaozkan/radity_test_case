@@ -10,7 +10,7 @@ import java.util.Properties;
 
 public class VelocityRenderer {
 
-    public static String renderInvoice(Invoice invoice, Client client) throws Exception {
+    public static String renderInvoice(Invoice invoice, Client client, Company company) throws Exception {
         Properties props = new Properties();
         props.setProperty("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
 
@@ -23,7 +23,8 @@ public class VelocityRenderer {
         context.put("invoice", invoice);
         context.put("address", invoice.getBillingAddress());
         context.put("items", invoice.getItems());
-        context.put("client", client);   // And this
+        context.put("client", client);
+        context.put("company", company);
 
         StringWriter writer = new StringWriter();
         template.merge(context, writer);

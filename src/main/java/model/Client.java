@@ -9,7 +9,7 @@ public class Client {
     private String phone;
     private String email;
     private String contactName;
-    private String website; // <-- Added website field
+    private String website;
 
     public String getName() {
         return name;
