@@ -20,8 +20,34 @@
             background: #fff;
         }
         .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             padding: 30px 40px 20px 40px;
             border-bottom: 1px solid #eee;
+            position: relative;
+        }
+        .header-left {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header-logo {
+            display: flex;
+            align-items: center;
+            margin-left: 24px;
+        }
+        .company-logo {
+            width: 128px;
+            height: 128px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #eee;
+            box-shadow: 0 2px 8px #f4f4f4;
+            margin-right: 50px;
+            margin-left: -10px;
         }
         .client {
             font-size: 28px;
@@ -31,27 +57,21 @@
             font-size: 16px;
             margin: 8px 0 0 0;
         }
-        .contact-details {
-            font-size: 15px;
-            margin-top: 4px;
-        }
         .invoice-title-row {
-            padding: 18px 40px 18px 40px;
+            margin-top: 16px;
             display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid #eee;
-            align-items: center;
+            flex-direction: column;
+            gap: 6px;
         }
         .invoice-title {
             font-size: 22px;
             font-weight: 700;
             letter-spacing: 2px;
         }
-        .invoice-num {
-            font-size: 20px;
-        }
         .invoice-phone {
-            font-size: 16px;
+            font-size: 18px;
+            margin-top: 10px;
+            color: #222;
         }
         .bill-location-section {
             display: flex;
@@ -63,11 +83,17 @@
             width: 48%;
             font-size: 15px;
         }
-        .bill-label, .location-label {
+        .bill-label, .location-label, .date-label {
+            padding: 0 0 5px 0;
             font-size: 16px;
             font-weight: 600;
             letter-spacing: 1px;
             margin-bottom: 8px;
+        }
+        .bill-label, .location-label {
+            border-bottom: 1px solid #eee;
+            width: fit-content;
+            padding-right: 12ch;
         }
         .bill-to, .date {
             width: 48%;
@@ -89,41 +115,55 @@
             margin: 30px auto 0 auto;
             border-collapse: collapse;
             font-size: 15px;
-        }
-        .items-table th, .items-table td {
-            border-bottom: 1px solid #eee;
-            padding: 12px 8px;
-            text-align: left;
+            background: #fff;
+            border-left: 1.5px solid #ddd;
+            border-right: 1.5px solid #ddd;
         }
         .items-table th {
             font-weight: 700;
-            background: #f8f8f8;
+            background: #b6daff;
+            text-align: center;
+            padding: 12px 8px;
+            border-bottom: 1px solid #eee;
+            border-left: 1.5px solid #eee;
+            border-right: 1.5px solid #eee;
         }
-        .items-table td:last-child, .items-table th:last-child {
+        .items-table td {
+            padding: 10px 4px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+            border-left: 1.5px solid #eee;
+            border-right: 1.5px solid #eee;
+        }
+        .items-table td:last-child,
+        .items-table th:last-child {
             text-align: right;
         }
-        .summary-section {
-            width: 90%;
-            margin: 25px auto 0 auto;
+        .items-table tfoot tr td {
+            font-weight: 600;
+            background: #fff;
+            text-align: right;
+            border-top: 1px solid #eee;
+            border-bottom: none;
+            font-size: 16px;
+            border-left: 1.5px solid #eee;
+            border-right: 1.5px solid #eee;
         }
-        .summary-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 15px;
+        .items-table .label {
+            text-align: right;
+            font-size: 0.75rem;
         }
-        .summary-table td {
-            padding: 10px 4px;
-            text-align: left;
-        }
-        .summary-table .label {
-            font-weight: 500;
-        }
-        .summary-table .value {
+        .items-table .value {
             text-align: right;
             width: 130px;
         }
-        .summary-table .bold {
+        .items-table .bold {
             font-weight: 700;
+            font-size: 1.15rem;
+        }
+        .empty-cell {
+            border: none !important;
+            background: none !important;
         }
         .footer {
             text-align: left;
@@ -142,90 +182,106 @@
             color: #333;
             margin-top: 10px;
         }
+        .color-blue {
+            color: #5b8cff;
+        }
+        .color-white {
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <!-- Header -->
     <div class="header">
-        <div class="client">$!company.name</div>
-        <div class="client-details">$!company.address</div>
-        <div class="client-details">$!company.website, $!company.email</div>
-    </div>
-    <!-- Invoice Title/Number/Phone -->
-    <div class="invoice-title-row">
-        <div>
-            <div class="invoice-title">INVOICE #$!invoice.invoiceNumber</div> <br>
-            <div class="invoice-phone">$!company.phone</div>
+        <div class="header-left">
+            <div class="client color-blue">$!company.name</div>
+            <div class="client-details">$!company.address</div>
+            <div class="client-details">$!company.website, $!company.email</div>
+            <div class="invoice-title-row">
+                <br><br>
+                <div class="invoice-title color-blue">INVOICE #$!invoice.invoiceNumber</div>
+                <div class="invoice-phone">$!company.phone</div>
+            </div>
         </div>
+        <img src="$!company.logoUrl" alt="Company Logo" class="company-logo"/>
     </div>
+
     <!-- Bill To and Location -->
     <div class="bill-location-section">
         <div class="bill-to">
-            <div class="bill-label">BILL TO</div>
+            <div class="bill-label color-blue">BILL TO</div>
             $!invoice.customerName <br>
             $!client.name <br>
             $!client.address <br>
             $!client.phone, $!invoice.customerEmail
         </div>
         <div class="location">
-            <div class="location-label">LOCATION</div>
+            <div class="location-label color-blue">LOCATION</div>
             $!address.street <br>
             $!address.city, $!address.state $!address.zip <br>
             $!client.phone
         </div>
         <div class="date">
-            <div class="location-label">Date</div>
+            <div class="date-label color-white">Date</div>
             <div class="date-row">Invoice Date: $!invoice.invoiceDate</div>
             <div class="date-row">Due Date: $!invoice.dueDate</div>
         </div>
     </div>
     <!-- Items Table -->
     <table class="items-table">
+        <thead>
         <tr>
             <th>DESCRIPTION</th>
             <th>QTY</th>
             <th>UNIT PRICE</th>
             <th>TOTAL</th>
         </tr>
-        #foreach($item in $items)
+        </thead>
+        <tbody>
+            #foreach($item in $items)
             <tr>
                 <td>$!item.name</td>
-                <td>$!item.quantity</td>
-                <td>$!item.price</td>
+                <td style="text-align: center;">$!item.quantity</td>
+                <td style="text-align: center;">$!item.price</td>
                 <td>#set($lineTotal = $item.quantity * $item.price)$lineTotal</td>
             </tr>
-        #end
+            #end
+        </tbody>
+        <tfoot>
+        <tr>
+            <td class="empty-cell" colspan="2"></td>
+            <td class="label">SUBTOTAL</td>
+            <td class="value">$!invoice.subtotal</td>
+        </tr>
+        <tr>
+            <td class="empty-cell" colspan="2"></td>
+            <td class="label">DISCOUNT</td>
+            <td class="value">0.00</td>
+        </tr>
+        <tr>
+            <td class="empty-cell" colspan="2"></td>
+            <td class="label">SUBTOTAL LESS DISCOUNT</td>
+            <td class="value">$!invoice.subtotal</td>
+        </tr>
+        <tr>
+            <td class="empty-cell" colspan="2"></td>
+            <td class="label">TAX RATE</td>
+            <td class="value">$!invoice.tax%</td>
+        </tr>
+        <tr>
+            <td class="empty-cell" colspan="2"></td>
+            <td class="label">TOTAL TAX</td>
+            <td class="value">$!invoice.tax</td>
+        </tr>
+        <tr>
+            <td class="empty-cell" colspan="2"></td>
+            <td class="label bold color-blue">Balance Due</td>
+            <td class="value bold">$!invoice.total</td>
+        </tr>
+        </tfoot>
     </table>
-    <!-- Summary Table -->
-    <div class="summary-section">
-        <table class="summary-table">
-            <tr>
-                <td class="label">SUBTOTAL</td>
-                <td class="value">$!invoice.subtotal</td>
-            </tr>
-            <tr>
-                <td class="label">DISCOUNT</td>
-                <td class="value">0.00</td>
-            </tr>
-            <tr>
-                <td class="label">SUBTOTAL LESS DISCOUNT</td>
-                <td class="value">$!invoice.subtotal</td>
-            </tr>
-            <tr>
-                <td class="label">TAX RATE</td>
-                <td class="value">$!invoice.tax%</td>
-            </tr>
-            <tr>
-                <td class="label">TOTAL TAX</td>
-                <td class="value">$!invoice.tax</td>
-            </tr>
-            <tr>
-                <td class="label bold">BALANCE DUE</td>
-                <td class="value bold">$!invoice.total</td>
-            </tr>
-        </table>
-    </div>
+
     <!-- Footer / Thank You and Terms -->
     <div class="footer">
         <div class="thanks">Thank you for your business!</div>
