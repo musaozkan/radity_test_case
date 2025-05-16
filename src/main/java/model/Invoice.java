@@ -1,60 +1,59 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Invoice {
-    private String invoice_number;
-    private String invoice_date;
-    private String due_date;
-    private Client client;
-    private Company company;
+    private String id;
+    private String invoiceNumber;
+    private String customerName;
+    private String customerEmail;
+    private BillingAddress billingAddress;
     private List<InvoiceItem> items;
     private double subtotal;
     private double tax;
     private double total;
-    private double discount;
-    private double taxRate;
-    private String terms;
-    private String paymentInstructions;
+    private boolean paid;
 
-    public String getInvoice_number() {
-        return invoice_number;
+    public String getId() {
+        return id;
     }
 
-    public void setInvoice_number(String invoice_number) {
-        this.invoice_number = invoice_number;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getInvoice_date() {
-        return invoice_date;
+    public String getInvoiceNumber() {
+        return invoiceNumber;
     }
 
-    public void setInvoice_date(String invoice_date) {
-        this.invoice_date = invoice_date;
+    public void setInvoiceNumber(String invoiceNumber) {
+        this.invoiceNumber = invoiceNumber;
     }
 
-    public String getDue_date() {
-        return due_date;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setDue_date(String due_date) {
-        this.due_date = due_date;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
-    public Client getClient() {
-        return client;
+    public String getCustomerEmail() {
+        return customerEmail;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
     }
 
-    public Company getCompany() {
-        return company;
+    public BillingAddress getBillingAddress() {
+        return billingAddress;
     }
 
-    public void setCompany(Company company) {
-        this.company = company;
+    public void setBillingAddress(BillingAddress billingAddress) {
+        this.billingAddress = billingAddress;
     }
 
     public List<InvoiceItem> getItems() {
@@ -89,35 +88,27 @@ public class Invoice {
         this.total = total;
     }
 
-    public double getDiscount() {
-        return discount;
+    public boolean isPaid() {
+        return paid;
     }
 
-    public void setDiscount(double discount) {
-        this.discount = discount;
+    public void setPaid(boolean paid) {
+        this.paid = paid;
     }
 
-    public double getTaxRate() {
-        return taxRate;
-    }
-
-    public void setTaxRate(double taxRate) {
-        this.taxRate = taxRate;
-    }
-
-    public String getTerms() {
-        return terms;
-    }
-
-    public void setTerms(String terms) {
-        this.terms = terms;
-    }
-
-    public String getPaymentInstructions() {
-        return paymentInstructions;
-    }
-
-    public void setPaymentInstructions(String paymentInstructions) {
-        this.paymentInstructions = paymentInstructions;
+    @Override
+    public String toString() {
+        return "Invoice{" +
+                "id='" + id + '\'' +
+                ", invoiceNumber='" + invoiceNumber + '\'' +
+                ", customerName='" + customerName + '\'' +
+                ", customerEmail='" + customerEmail + '\'' +
+                ", billingAddress=" + billingAddress +
+                ", items=" + items +
+                ", subtotal=" + subtotal +
+                ", tax=" + tax +
+                ", total=" + total +
+                ", paid=" + paid +
+                '}';
     }
 }

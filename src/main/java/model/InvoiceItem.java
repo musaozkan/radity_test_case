@@ -1,40 +1,53 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class InvoiceItem {
-    private String description;
-    private int qty;
-    private double unit_price;
-    private double total;
+    private String id;
+    private String name;
+    private int quantity;
+    private double price;
 
-    public String getDescription() {
-        return description;
+    public String getId() {
+        return id;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public int getQty() {
-        return qty;
+    public String getName() {
+        return name;
     }
 
-    public void setQty(int qty) {
-        this.qty = qty;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public double getUnit_price() {
-        return unit_price;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setUnit_price(double unit_price) {
-        this.unit_price = unit_price;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
-    public double getTotal() {
-        return total;
+    public double getPrice() {
+        return price;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "InvoiceItem{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                '}';
     }
 }
