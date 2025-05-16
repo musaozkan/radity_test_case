@@ -9,6 +9,7 @@ public class Client {
     private String phone;
     private String email;
     private String contactName;
+    private String website; // <-- Added website field
 
     public String getName() {
         return name;
@@ -48,5 +49,13 @@ public class Client {
 
     public void setContactName(String contactName) {
         this.contactName = contactName;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
     }
 }

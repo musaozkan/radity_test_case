@@ -1,20 +1,33 @@
 package model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Invoice {
     private String id;
     private String invoiceNumber;
+    private String invoiceDate;
+    private String dueDate;
     private String customerName;
     private String customerEmail;
+    private String paymentInstructions;
+    private String termsAndConditions;
     private BillingAddress billingAddress;
     private List<InvoiceItem> items;
     private double subtotal;
     private double tax;
     private double total;
     private boolean paid;
+
+    public Invoice() {
+        LocalDate now = LocalDate.now();
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd-MM-yy");
+        this.invoiceDate = now.format(fmt);
+        this.dueDate = now.plusDays(30).format(fmt);
+    }
 
     public String getId() {
         return id;
@@ -32,6 +45,22 @@ public class Invoice {
         this.invoiceNumber = invoiceNumber;
     }
 
+    public String getInvoiceDate() {
+        return invoiceDate;
+    }
+
+    public void setInvoiceDate(String invoiceDate) {
+        this.invoiceDate = invoiceDate;
+    }
+
+    public String getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
+    }
+
     public String getCustomerName() {
         return customerName;
     }
@@ -46,6 +75,22 @@ public class Invoice {
 
     public void setCustomerEmail(String customerEmail) {
         this.customerEmail = customerEmail;
+    }
+
+    public String getPaymentInstructions() {
+        return paymentInstructions;
+    }
+
+    public void setPaymentInstructions(String paymentInstructions) {
+        this.paymentInstructions = paymentInstructions;
+    }
+
+    public String getTermsAndConditions() {
+        return termsAndConditions;
+    }
+
+    public void setTermsAndConditions(String termsAndConditions) {
+        this.termsAndConditions = termsAndConditions;
     }
 
     public BillingAddress getBillingAddress() {
