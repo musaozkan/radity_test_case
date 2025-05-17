@@ -39,8 +39,8 @@
             height: 128px;
             object-fit: cover;
             border-radius: 50%;
-            border: 2px solid #eee;
-            box-shadow: 0 2px 8px #f4f4f4;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 8px #fff;
             margin-right: 50px;
             margin-left: -10px;
         }
@@ -296,7 +296,7 @@
             <td class="empty-cell" colspan="2"></td>
             <td class="label bold color-blue empty-cell">Balance Due</td>
             #set($balanceDue = $subtotal + $taxTotal)
-            <td class="value bold">$formatter.format2($balanceDue)</td>
+            <td class="value bold">$ $formatter.format2($balanceDue)</td>
         </tr>
         </tfoot>
     </table>
