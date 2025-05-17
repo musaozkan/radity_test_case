@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 15px;
+            color: #222;
+            background: #fff;
+            margin: 0;
+        }
+        .container {
+            width: 800px;
+            margin: 40px auto;
+            padding: 0;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 12px #f2f2f2;
+            background: #fff;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 40px 20px 40px;
+            border-bottom: 1px solid #eee;
+            position: relative;
+        }
+        .header-left {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .company-logo {
+            width: 128px;
+            height: 128px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #eee;
+            box-shadow: 0 2px 8px #f4f4f4;
+            margin-right: 50px;
+            margin-left: -10px;
+        }
+        .client {
+            font-size: 28px;
+            font-weight: 600;
+        }
+        .client-details {
+            font-size: 16px;
+            margin: 8px 0 0 0;
+        }
+        .invoice-title-row {
+            margin-top: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .invoice-title {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        .invoice-phone {
+            font-size: 18px;
+            margin-top: 10px;
+            color: #222;
+        }
+        .bill-location-section {
+            display: flex;
+            justify-content: space-between;
+            padding: 28px 40px 0 40px;
+            margin-bottom: 8px;
+        }
+        .bill-to, .location, .date {
+            width: 48%;
+            font-size: 15px;
+        }
+        .bill-label, .location-label, .date-label{
+            padding: 0 0 5px 0;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .bill-label, .location-label, .terms-label {
+            border-bottom: 1px solid #555;
+            width: fit-content;
+            padding-right: 12ch;
+        }
+        .date {
+            min-width: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            margin-left: 24px;
+        }
+        .date-row {
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+        .items-table {
+            width: 90%;
+            margin: 0 auto 0 auto;
+            border-collapse: collapse;
+            font-size: 15px;
+            background: #fff;
+        }
+        .items-table th {
+            font-weight: 700;
+            background: #1261D6;
+            text-align: center;
+            color: #eee;
+            border-top:  2px solid #555;
+            border-bottom: 1px solid #ccc;
+            border-left: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+        }
+        .items-table th:first-child {
+            border-left: 2px solid #555;
+        }
+        .items-table th:last-child {
+            border-right: 2px solid #555;
+        }
+        .items-table td {
+            border-bottom: 1px solid #ccc;
+            text-align: left;
+            border-left: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+        }
+        .items-table td:first-child {
+            border-left: 2px solid #555;
+        }
+        .items-table td:last-child {
+            border-right: 2px solid #555;
+        }
+        .items-table tr:last-child td {
+            border-bottom: 2px solid #555;
+        }
+        .items-table tfoot tr td {
+            padding: 4px 4px;
+            background: #fff;
+            text-align: right;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+            border-left: none !important;
+            border-right: none !important;
+        }
+        .items-table .label {
+            font-weight: 600;
+            text-align: right;
+            font-size: 0.75rem;
+        }
+        .items-table .value {
+            text-align: right;
+            width: 200px;
+            background: none !important;
+        }
+        .items-table .bold {
+            font-weight: 700;
+            font-size: 1.15rem;
+            background: rgba(91, 140, 255, 0.35);
+            border-bottom: 1px solid #222222;
+        }
+        .items-table tr:nth-child(even) td {
+            background: #f5f5f5;
+        }
+        .empty-cell {
+            border: none !important;
+            background: none !important;
+        }
+        .upper-cell {
+            border-top: none !important;
+            border-left: none !important;
+            border-right: none !important;
+            border-bottom: 1px solid #222222 !important;
+            background: none !important;
+        }
+        .footer {
+            text-align: left;
+            padding: 25px 40px 10px 40px;
+            font-size: 15px;
+            color: #444;
+        }
+        .terms {
+            font-size: 15px;
+            color: #333;
+            margin-top: 10px;
+        }
+        .color-blue {
+            color: #5b8cff;
+        }
+        .color-white {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <div class="header-left">
+            <div class="client color-blue">Franey and Sons</div>
+            <div class="client-details">3815 The Grove, Port Waldo, DE 06800</div>
+            <div class="client-details">www.grounded-individual.info, Reinhold23@hotmail.com</div>
+            <div class="invoice-title-row">
+                <br><br>
+                <div class="invoice-title color-blue">INVOICE #73833</div>
+                <div class="invoice-phone">366.888.0469 x231</div>
+            </div>
+        </div>
+        <img src="https://api.dicebear.com/8.x/shapes/svg?seed=Kiehn, Pfannerstill and Schneider" alt="Company Logo" class="company-logo"/>
+    </div>
+
+    <!-- Bill To and Location -->
+    <div class="bill-location-section">
+        <div class="bill-to">
+            <div class="bill-label color-blue">BILL TO</div>
+            Roosevelt Mante <br>
+            Bergstrom, Zboncak and McDermott <br>
+            356 Hintz Estate, North Koryborough, PA 98086-7099 <br>
+            667.664.8663, Elda_Flatley66@hotmail.com
+        </div>
+        <div class="location">
+            <div class="location-label color-blue">LOCATION</div>
+            99018 Oak Drive <br>
+            Decatur, AZ 38316-3544 <br>
+            667.664.8663
+        </div>
+        <div class="date">
+            <div class="date-label color-white">Date</div>
+            <div class="date-row">Invoice Date: 17/05/25</div>
+            <div class="date-row">Due Date: 16/06/25</div>
+        </div>
+    </div>
+    <!-- Items Table -->
+    <table class="items-table">
+        <thead>
+        <tr><td class="upper-cell" colspan="4">&nbsp;</td></tr>
+        <tr><td class="upper-cell" colspan="4">&nbsp;</td></tr>
+        <tr><td class="upper-cell" colspan="4">&nbsp;</td></tr>
+        <tr><td class="upper-cell" colspan="4">&nbsp;</td></tr>
+        <tr><td class="upper-cell" colspan="4">&nbsp;</td></tr>
+        <tr><td class="upper-cell" colspan="4">&nbsp;</td></tr>
+        <tr><td class="upper-cell" colspan="4">&nbsp;</td></tr>
+        <tr>
+            <th>DESCRIPTION</th>
+            <th>QTY</th>
+            <th>UNIT PRICE</th>
+            <th>TOTAL</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Intelligent Rubber Hat</td>
+                <td style="text-align: center;">5.00</td>
+                <td style="text-align: center;">668.19</td>
+                <td style="text-align: right;">3340.95</td>
+            </tr>
+            <tr>
+                <td>Oriental Bamboo Chips</td>
+                <td style="text-align: center;">3.00</td>
+                <td style="text-align: center;">779.49</td>
+                <td style="text-align: right;">2338.47</td>
+            </tr>
+            <tr>
+                <td>Recycled Marble Cheese</td>
+                <td style="text-align: center;">4.00</td>
+                <td style="text-align: center;">41.95</td>
+                <td style="text-align: right;">167.80</td>
+            </tr>
+            <tr>
+                <td>Modern Silk Bacon</td>
+                <td style="text-align: center;">2.00</td>
+                <td style="text-align: center;">310.29</td>
+                <td style="text-align: right;">620.58</td>
+            </tr>
+            <tr>
+                <td>Electronic Wooden Pizza</td>
+                <td style="text-align: center;">2.00</td>
+                <td style="text-align: center;">737.75</td>
+                <td style="text-align: right;">1475.50</td>
+            </tr>
+            <tr>
+                <td>Handmade Metal Mouse</td>
+                <td style="text-align: center;">3.00</td>
+                <td style="text-align: center;">962.79</td>
+                <td style="text-align: right;">2888.37</td>
+            </tr>
+            <tr>
+                <td>Ergonomic Aluminum Gloves</td>
+                <td style="text-align: center;">2.00</td>
+                <td style="text-align: center;">658.55</td>
+                <td style="text-align: right;">1317.10</td>
+            </tr>
+            <tr>
+                <td>Intelligent Wooden Salad</td>
+                <td style="text-align: center;">5.00</td>
+                <td style="text-align: center;">209.05</td>
+                <td style="text-align: right;">1045.25</td>
+            </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td class="empty-cell" colspan="2"></td>
+            <td class="label empty-cell">SUBTOTAL</td>
+            <td class="value">13194.02</td>
+        </tr>
+        <tr>
+            <td class="empty-cell" colspan="2"></td>
+            <td class="label empty-cell">DISCOUNT</td>
+            <td class="value">0.00</td>
+        </tr>
+        <tr>
+            <td class="empty-cell" style="text-align: center" colspan="2">Thank you for your business!</td>
+            <td class="label empty-cell">SUBTOTAL LESS DISCOUNT</td>
+            <td class="value">13194.02</td>
+        </tr>
+        <tr>
+            <td class="empty-cell" colspan="2"></td>
+            <td class="label empty-cell">TAX RATE</td>
+            <td class="value">15.00%</td>
+        </tr>
+        <tr>
+            <td class="empty-cell" colspan="2"></td>
+            <td class="label empty-cell">TOTAL TAX</td>
+            <td class="value">1979.10</td>
+        </tr>
+        <tr>
+            <td class="empty-cell" colspan="2"></td>
+            <td class="label bold color-blue empty-cell">Balance Due</td>
+            <td class="value bold">15173.12</td>
+        </tr>
+        </tfoot>
+    </table>
+
+    <!-- Footer / Thank You and Terms -->
+    <div class="footer">
+        <div class="terms">
+            <strong class="terms-label color-blue">Terms & Instructions:</strong><br>
+            <div style="padding-bottom: 5px">Add payment instructions here, e.g: bank, paypal...</div>
+            <div style="padding-bottom: 5px">Add terms here, e.g: warranty, returns policy...</div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

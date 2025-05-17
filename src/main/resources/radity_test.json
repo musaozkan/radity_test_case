@@ -1,0 +1,164 @@
+{
+  "uuid": "bc13f291-9029-428f-a12c-da4cda72cdd0",
+  "lastMigration": 33,
+  "name": "Radity test",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3000,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "8f23ff0b-f421-4a3b-9a76-b1907414cceb",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "invoices",
+      "responses": [
+        {
+          "uuid": "7ec84c11-fd62-4266-adfc-9780cac5b13a",
+          "body": "[\n  {{#repeat 10}}\n  {\n    \"id\": \"{{faker 'string.uuid'}}\",\n    \"invoiceNumber\": \"{{faker 'number.int' max=99999}}\",\n    \"customerName\": \"{{faker 'person.firstName'}} {{faker 'person.lastName'}}\",\n    \"customerEmail\": \"{{faker 'internet.email'}}\",\n    \"billingAddress\": {\n      \"street\": \"{{faker 'location.streetAddress'}}\",\n      \"city\": \"{{faker 'location.city'}}\",\n      \"state\": \"{{faker 'location.state' abbreviated=true}}\",\n      \"zip\": \"{{faker 'location.zipCode'}}\"\n    },\n    \"items\": [\n      {{#repeat 8}}\n      {\n        \"id\": \"{{faker 'string.uuid'}}\",\n        \"name\": \"{{faker 'commerce.productName'}}\",\n        \"quantity\": {{faker 'number.int' max=5 min=1}},\n        \"price\": {{faker 'commerce.price' precision=0.1}}\n      }{{#unless @last}},{{/unless}}\n      {{/repeat}}\n    ],\n    \"subtotal\": {{faker 'commerce.price'}},\n    \"tax\": {{faker 'number.int' min=5 max=15}},\n    \"total\": {{faker 'commerce.price'}},\n    \"paid\": {{faker 'datatype.boolean'}},\n    \"paymentInstructions\": \"Add payment instructions here, e.g: bank, paypal...\",\n    \"termsAndConditions\": \"Add terms here, e.g: warranty, returns policy...\"\n  }{{#unless @last}},{{/unless}}\n  {{/repeat}}\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "6c3d273f-9ca2-4fc4-8910-26425847aa1c",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "clients",
+      "responses": [
+        {
+          "uuid": "d5837e89-84e7-4d0f-8013-de5095845e3e",
+          "body": "[\n  {{#repeat 10}}\n    {\n      \"id\": \"{{faker 'string.uuid'}}\",\n      \"name\": \"{{faker 'company.name'}}\",\n      \"email\": \"{{faker 'internet.email'}}\",\n      \"phone\": \"{{faker 'phone.number'}}\",\n      \"address\": \"{{faker 'location.streetAddress'}}, {{faker 'location.city'}}, {{faker 'location.state' abbreviated=true}} {{faker 'location.zipCode'}}\",\n      \"website\": \"www.{{faker 'internet.domainName'}}\",\n      \"isActive\": {{faker 'datatype.boolean'}}\n    }\n  {{/repeat}}\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "10cf32c6-860f-4f42-bb14-696e9ed16f26",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "companies",
+      "responses": [
+        {
+          "uuid": "7d962049-3a13-47c4-8a91-8d98fc75da7c",
+          "body": "[\n  {{#repeat 10}}\n    {\n      \"id\": \"{{faker 'string.uuid'}}\",\n      \"name\": \"{{faker 'company.name'}}\",\n      \"email\": \"{{faker 'internet.email'}}\",\n      \"phone\": \"{{faker 'phone.number'}}\",\n      \"address\": \"{{faker 'location.streetAddress'}}, {{faker 'location.city'}}, {{faker 'location.state' abbreviated=true}} {{faker 'location.zipCode'}}\",\n      \"website\": \"www.{{faker 'internet.domainName'}}\",\n      \"logoUrl\": \"https://api.dicebear.com/8.x/shapes/svg?seed={{faker 'company.name'}}\"\n    }\n  {{/repeat}}\n]\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "8f23ff0b-f421-4a3b-9a76-b1907414cceb"
+    },
+    {
+      "type": "route",
+      "uuid": "6c3d273f-9ca2-4fc4-8910-26425847aa1c"
+    },
+    {
+      "type": "route",
+      "uuid": "10cf32c6-860f-4f42-bb14-696e9ed16f26"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": []
+}
