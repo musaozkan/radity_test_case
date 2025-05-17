@@ -1,7 +1,6 @@
-package service;
+package services;
 
 import model.*;
-import service.Formatter;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;

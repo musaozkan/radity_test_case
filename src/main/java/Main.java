@@ -3,12 +3,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import model.Client;
 import model.Company;
 import model.Invoice;
-import service.VelocityRenderer;
+import services.VelocityRenderer;
+import services.PDFService;
 
 import java.net.URL;
 import java.util.List;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 public class Main {
     public static void main(String[] args) {
@@ -32,14 +31,11 @@ public class Main {
             Invoice invoice = invoices.get(0); // Take the first invoice
             Client client = clients.get(0); // Take the first client
             Company company = companies.get(0); // Take the first company
-
             String html = VelocityRenderer.renderInvoice(invoice, client, company);
 
-            // Save HTML to file
-            Path outputPath = Path.of("outputs", "invoice.html");
-            Files.createDirectories(outputPath.getParent());
-            Files.writeString(outputPath, html);
-            System.out.println("HTML output saved to: " + outputPath.toAbsolutePath());
+            // Save HTML to PDF
+            PDFService.htmlToPdf(html, "outputs/invoice.pdf");
+            System.out.println("HTML output saved to: " +"outputs/invoice.pdf");
 
         } catch (Exception e) {
             e.printStackTrace();

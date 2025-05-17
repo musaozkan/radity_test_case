@@ -1,4 +1,4 @@
-package service;
+package services;
 
 public class Formatter {
     public String format2(double number) {
