@@ -1,6 +1,7 @@
 package service;
 
 import model.*;
+import service.Formatter;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -25,6 +26,8 @@ public class VelocityRenderer {
         context.put("items", invoice.getItems());
         context.put("client", client);
         context.put("company", company);
+
+        context.put("formatter", new Formatter());
 
         StringWriter writer = new StringWriter();
         template.merge(context, writer);
