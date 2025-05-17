@@ -146,10 +146,14 @@ public class Invoice {
         return "Invoice{" +
                 "id='" + id + '\'' +
                 ", invoiceNumber='" + invoiceNumber + '\'' +
+                ", invoiceDate='" + invoiceDate + '\'' +
+                ", dueDate='" + dueDate + '\'' +
                 ", customerName='" + customerName + '\'' +
                 ", customerEmail='" + customerEmail + '\'' +
-                ", billingAddress=" + billingAddress +
-                ", items=" + items +
+                ", paymentInstructions='" + paymentInstructions + '\'' +
+                ", termsAndConditions='" + termsAndConditions + '\'' +
+                ", billingAddress=" + (billingAddress != null ? billingAddress.toString() : "null") +
+                ", items=" + (items != null ? items.toString() : "null") +
                 ", subtotal=" + subtotal +
                 ", tax=" + tax +
                 ", total=" + total +

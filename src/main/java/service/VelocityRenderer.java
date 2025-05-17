@@ -21,6 +21,7 @@ public class VelocityRenderer {
         Template template = velocityEngine.getTemplate("template/invoice_template.vm");
 
         VelocityContext context = new VelocityContext();
+
         context.put("invoice", invoice);
         context.put("address", invoice.getBillingAddress());
         context.put("items", invoice.getItems());

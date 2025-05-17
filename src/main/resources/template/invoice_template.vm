@@ -78,15 +78,15 @@
             width: 48%;
             font-size: 15px;
         }
-        .bill-label, .location-label, .date-label {
+        .bill-label, .location-label, .date-label{
             padding: 0 0 5px 0;
             font-size: 16px;
             font-weight: 600;
             letter-spacing: 1px;
             margin-bottom: 8px;
         }
-        .bill-label, .location-label {
-            border-bottom: 1px solid #eee;
+        .bill-label, .location-label, .terms-label {
+            border-bottom: 1px solid #555;
             width: fit-content;
             padding-right: 12ch;
         }
@@ -304,20 +304,12 @@
     <!-- Footer / Thank You and Terms -->
     <div class="footer">
         <div class="terms">
-            <strong>Terms & Instructions:</strong><br>
-            #if($invoice.paymentInstructions && $invoice.paymentInstructions.trim() != "")
-                $invoice.paymentInstructions
-            #else
-                Please make the payment via bank transfer within 30 days.
-            #end
-            <br>
-            #if($invoice.termsAndConditions && $invoice.termsAndConditions.trim() != "")
-                $invoice.termsAndConditions
-            #else
-                All sales are final. Goods sold are not returnable or exchangeable.
-            #end
+            <strong class="terms-label color-blue">Terms & Instructions:</strong><br>
+            <div style="padding-bottom: 5px">$invoice.paymentInstructions</div>
+            <div style="padding-bottom: 5px">$invoice.termsAndConditions</div>
         </div>
     </div>
+
 </div>
 </body>
 </html>
