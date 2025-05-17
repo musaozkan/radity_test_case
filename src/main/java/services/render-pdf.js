@@ -18,9 +18,9 @@ const puppeteer = require('puppeteer');
     await page.pdf({
         path: pdfPath,
         width: '170mm',
-        height: '230mm',
+        height: '215.5mm',
         printBackground: true,
-        margin: { top: '0mm', bottom: '0mm', left: '0mm', right: '0mm' }
+        margin: { top: '0mm', bottom: '0mm', left: '0mm', right: '0mm' },
     });
     await browser.close();
     console.log('PDF başarıyla oluşturuldu:', pdfPath);
